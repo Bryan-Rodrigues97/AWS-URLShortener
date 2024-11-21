@@ -2,7 +2,6 @@ package com.brdev.urlShortener.Utils;
 
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.core.sync.RequestBody;
-import software.amazon.awssdk.services.s3.endpoints.internal.Value;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
@@ -13,7 +12,7 @@ public class S3BucketIntegration {
         try {
             PutObjectRequest putRequest = PutObjectRequest
                     .builder()
-                    .bucket("brdev-url-shortener-storage")
+                    .bucket(System.getenv("BUCKET_NAME"))
                     .key(String.format("%s.json",shortUrlCode))
                     .build();
 
@@ -29,7 +28,7 @@ public class S3BucketIntegration {
         try {
             GetObjectRequest getRequest = GetObjectRequest
                     .builder()
-                    .bucket("brdev-url-shortener-storage")
+                    .bucket(System.getenv("BUCKET_NAME"))
                     .key(String.format("%s.json", shortUrlCode))
                     .build();
 
